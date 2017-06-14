@@ -22,3 +22,10 @@ def pNormTwoPart(a: Array[Int], p: Double): Int = {
   val (sum1, sum2) = parallel(sumSegments(a, p, 0, m), sumSegments(a, p, m, a.length))
   power(sum1 + sum2, 1/p)
 }
+
+def pNormFourPart(a: Array[Int], p: Double): Int = {
+  val (m1, m2, m3) = (a.length / 4, a.length/2, 3*a.length/4)
+  val ((sum1, sum2),(sum3, sum4)) = parallel(parallel(sumSegments(a, p, 0, m1), sumSegments(a, p, m1, m2)),
+  parallel(sumSegments(a, p, m2, m3), sumSegments(a, p, m3, a.length)))
+  power(sum1 + sum2, 1/p)
+}
