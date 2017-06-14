@@ -32,14 +32,20 @@ def startThread() = {
 }
 
 class Account(private var amount: Int = 0) {
+
+  val uid: Long = getUniqueId
+
   def transfer(target: Account, n: Int): Unit = {
-    this.synchronized {
-      target.synchronized {
+    if(this.uid < target.uid) this.lockAndTransfer(target, n)
+    else target.lockAndTransfer(this, -n)
+  }
+  private def lockAndTransfer(target: Account, n: Int) =
+    this.synchronized{
+      target.synchronized{
         this.amount -= n
         target.amount +=n
       }
     }
-  }
 }
 
 def startThread(a: Account, b: Account, n: Int) = {
