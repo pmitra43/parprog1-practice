@@ -1,4 +1,9 @@
-import week1.HelloThread
+class HelloThread extends Thread {
+  override def run(): Unit = {
+    println("Hello")
+    println("Thread")
+  }
+}
 
 val t = new HelloThread
 val s = new HelloThread
@@ -7,7 +12,7 @@ s.start()
 t.join()
 s.join()
 
-private val x = new AnyRef {}
+val x = new AnyRef {}
 private var uidCount = 0L
 
 def getUniqueId: Long = x.synchronized {
@@ -18,7 +23,7 @@ def getUniqueId: Long = x.synchronized {
 def startThread() = {
   val t = new Thread {
     override def run(): Unit = {
-      val uids = for(i<- 0 until 10) yield getUniqueId
+      val uids = for(_ <- 0 until 10) yield getUniqueId
       println(uids)
     }
   }
