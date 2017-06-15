@@ -1,6 +1,5 @@
 import scala.util.Random
-
-def parallel[A, B](taskA: => A, taskB: => B): (A, B) = { ??? }
+import week1.Parallel._
 
 def mcCount(iter: Int): Int = {
   val randomX = new Random

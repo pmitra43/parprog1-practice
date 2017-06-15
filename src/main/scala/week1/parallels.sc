@@ -1,4 +1,5 @@
 import scala.math.{abs, exp, log}
+import week1.Parallel._
 
 def sumSegments(a: Array[Int], p: Double, s: Int, t: Int): Int = {
   var i = s
@@ -14,8 +15,6 @@ def power(x: Int, p: Double) = exp(p * log(abs(x))).toInt
 
 def pNorm(a: Array[Int], p: Double): Int =
   power(sumSegments(a, p, 0, a.length), 1/p)
-
-def parallel[A, B](taskA: => A, taskB: => B): (A, B) = { ??? }
 
 def pNormTwoPart(a: Array[Int], p: Double): Int = {
   val m = a.length / 2
