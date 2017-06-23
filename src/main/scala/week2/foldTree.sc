@@ -18,7 +18,7 @@ def reduce[A](t: Tree[A], f: (A, A) => A): A = t match {
 def tree=Node(Leaf(1), Node(Leaf(3), Leaf(8)))
 def fMinus = (x: Int, y: Int) => x - y
 
-reduce(tree, fMinus)
+//reduce(tree, fMinus)
 
 def map[A,B](t: Tree[A], f: A => B): Tree[B] = t match {
   case Leaf(v) => Leaf(f(v))
@@ -32,9 +32,9 @@ def toList[A](t: Tree[A]): List[A] = t match {
 
 val t = Node(Leaf(1), Node(Leaf(2), Leaf(3)))
 
-reduce(map(t, List(_)), _ ++ _)
+//reduce(map(t, List(_)), _ ++ _)
 
-val threshold = _
+val threshold = 5
 
 def reduceSeg[A](inp: Array[A], left: Int, right: Int, f:(A, A)=> A): A = {
   if(right - left < threshold) {
@@ -53,3 +53,14 @@ def reduceSeg[A](inp: Array[A], left: Int, right: Int, f:(A, A)=> A): A = {
 def reduce[A](inp: Array[A], f: (A, A) => A): A =
   reduceSeg(inp, 0, inp.length, f)
 
+def f(u: Double, v: Double): Double =
+  (u + v)/(1.0 + u*v)
+def err(lst:List[Double]): Double =
+  lst.reduceLeft(f) - lst.reduceRight(f)
+def testAssoc: Double = {
+  val r = new scala.util.Random
+  val lst = List.fill(400)(r.nextDouble*0.002)
+  err(lst)
+}
+
+testAssoc
