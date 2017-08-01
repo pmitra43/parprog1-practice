@@ -64,3 +64,5 @@ def testAssoc: Double = {
 }
 
 testAssoc
+
+List(1,3,8).scanLeft(100)(_ + _)
